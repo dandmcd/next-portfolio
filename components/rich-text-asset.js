@@ -10,7 +10,6 @@ export function RichTextAsset({ id, assets }) {
       <>
         <Img
           src={asset.url}
-          // fill
           width={asset.width}
           height={asset.height}
           alt={asset.description}

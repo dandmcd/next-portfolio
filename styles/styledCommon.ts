@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const CommonTitle = styled.h1`
   line-height: 1.2;
@@ -12,7 +12,7 @@ export const CommonTitle = styled.h1`
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     font-size: 60px;
   }
-`
+`;
 
 export const CommonButton = styled.div`
   -webkit-tap-highlight-color: transparent;
@@ -64,4 +64,4 @@ export const CommonButton = styled.div`
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     width: 220px;
   }
-`
+`;

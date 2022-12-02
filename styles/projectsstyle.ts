@@ -3,10 +3,12 @@ import styled from "styled-components";
 import { CommonButton } from "./styledCommon";
 
 export const Container = styled.div`
-  height: 100vh;
+  position: relative;
+  width: 100%;
 `;
 
 export const FeaturedProjectContainer = styled.div`
+  width: 100%;
   padding-top: 1em;
   padding-bottom: 1em;
   background-color: #fdfae5;

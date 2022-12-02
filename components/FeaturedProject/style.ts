@@ -8,7 +8,7 @@ export const Figure = styled.div`
   min-width: 320px;
   max-height: 360px;
   max-width: 900px;
-  width: 900px;
+  width: 100%;
   height: 360px;
   margin: 0 auto;
   text-align: center;
