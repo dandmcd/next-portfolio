@@ -3,7 +3,6 @@ import { Barlow_Semi_Condensed } from "@next/font/google";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "../styles/globalstyled";
 import Footer from "./Footer/Footer";
-import Meta from "./meta";
 
 const barlow = Barlow_Semi_Condensed({
   weight: ["200", "400", "600", "700", "800"],
@@ -20,10 +19,9 @@ const BgImage = styled(Image)`
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Meta />
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <BgImage src="/wavepattern6.svg" alt="Background" fill />
+        <BgImage src="/wavepattern6.svg" alt="Background" fill priority />
         <main className={barlow.className}>{children}</main>
         <Footer />
       </ThemeProvider>

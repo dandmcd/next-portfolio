@@ -3,11 +3,13 @@ import styled from "styled-components";
 import { BlogProps } from "..";
 import BlogListing from "../../../components/BlogListing/BlogListing";
 import BlogPagination from "../../../components/BlogPagination/BlogPagination";
+import HeadSeo from "../../../components/HeadSeo";
 import {
   getoTotalBlogPosts,
   getPaginatedPostSummaries,
 } from "../../../lib/api";
 import { Config } from "../../../lib/pagination";
+import siteMetadata from "../../../lib/siteMetadata";
 import { CommonTitle } from "../../../styles/styledCommon";
 
 const BlogItem = styled.div`
@@ -32,6 +34,10 @@ interface Props {
 const BlogIndexPage: NextPage<Props> = ({ posts, totalPages, currentPage }) => {
   return (
     <>
+      <HeadSeo
+        title={`Blog | ${siteMetadata.title} `}
+        canonicalUrl={`${siteMetadata.siteUrl}/blog/page/${currentPage}`}
+      />
       <CommonTitle>The Whatever Blog</CommonTitle>
       {posts.map((post) => {
         return (

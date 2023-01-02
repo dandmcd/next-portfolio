@@ -18,6 +18,7 @@ import {
   MediaIcons,
   MediaIcon,
   Social,
+  ViewButton,
 } from "./style";
 import linkedin from "../../public/icons/linkedin.png";
 import github from "../../public/icons/github.png";
@@ -87,14 +88,14 @@ const Me: NextPage<Props> = ({ blogPost }) => {
               Hello, I am Daniel McDermott, a software developer majoring in
               Computer Science. I create full-stack apps using multiple
               programming languages including TypeScript and Python, along with
-              many of the latest tools including React and GraphQL.
+              many of the latest tools such as React and GraphQL.
             </Intro>
           </IntroBox>
         </IntroSection>
 
         <CtaBtns>
           <Link href="/projects">
-            <CommonButton>View My Projects</CommonButton>
+            <ViewButton>View My Projects</ViewButton>
           </Link>
         </CtaBtns>
         <BlogEntry>

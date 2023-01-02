@@ -34,9 +34,6 @@ export const GlobalStyle = createGlobalStyle`
     color: #111;
     outline: none;
     background-color: #DFC412;
-    background-image: url(${wavepattern});
-    background-size: cover;
-    background-repeat: no-repeat;
   }
   button {
     font-family: "Barlow Semi Condensed", sans-serif;

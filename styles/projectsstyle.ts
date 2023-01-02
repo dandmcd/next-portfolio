@@ -20,8 +20,8 @@ export const FeaturedProjectContainer = styled.div`
 
 export const ProjectsContainer = styled.div`
   display: grid;
-  z-index: 2;
   position: relative;
+  z-index: 2;
   grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
   row-gap: 20px;
   column-gap: 5px;

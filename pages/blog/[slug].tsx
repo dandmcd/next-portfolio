@@ -21,6 +21,8 @@ import {
 import CodeSnippet from "../../components/CodeSnippet";
 import { BlogProps } from ".";
 import { NextPage } from "next";
+import HeadSeo from "../../components/HeadSeo";
+import siteMetadata from "../../lib/siteMetadata";
 
 interface Props {
   post: BlogProps;
@@ -76,7 +78,10 @@ const BlogPage: NextPage<Props> = ({ post }) => {
 
   return (
     <>
-      {/* <SEO title={title} description={previewText} /> */}
+      <HeadSeo
+        title={`${post.title} | ${siteMetadata.title} `}
+        canonicalUrl={`${siteMetadata.siteUrl}/blog/${post.slug}`}
+      />
       <Wrapper>
         <BlogTitle>{title}</BlogTitle>
         <ContentWrapper>

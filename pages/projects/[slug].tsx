@@ -2,8 +2,10 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types";
 import { GetStaticPaths, NextPage } from "next";
 import { ProjectProps } from ".";
+import HeadSeo from "../../components/HeadSeo";
 import { RichTextAsset } from "../../components/rich-text-asset";
 import { getAllProjectsWithSlug, getProject } from "../../lib/api";
+import siteMetadata from "../../lib/siteMetadata";
 import {
   ContentfulHeading,
   ContentfulImg,
@@ -31,6 +33,7 @@ interface Props {
 const ProjectPage: NextPage<Props> = ({ post }) => {
   const {
     title,
+    slug,
     description,
     technology,
     preview,
@@ -59,41 +62,48 @@ const ProjectPage: NextPage<Props> = ({ post }) => {
     },
   };
   return (
-    <ProjectPageContainer>
-      <Grid>
-        <ContentSide>
-          {documentToReactComponents(description.json, options)}
-        </ContentSide>
-        <SideBar>
-          <div>
-            <ProjectTitle>{title}</ProjectTitle>
-            <Preview>{preview}</Preview>
-            <ViewButtons>
-              <a href={githubLink} rel="noopener noreferrer" target="_blank">
-                <GitLink>View Github</GitLink>
-              </a>
-              <a href={demoLink} rel="noopener noreferrer" target="_blank">
-                <DemoLink>See Live App</DemoLink>
-              </a>
-            </ViewButtons>
-          </div>
+    <>
+      <HeadSeo
+        title={`${title} | ${siteMetadata.title} `}
+        description={preview}
+        canonicalUrl={`${siteMetadata.siteUrl}/projects/${slug}`}
+      />
+      <ProjectPageContainer>
+        <Grid>
+          <ContentSide>
+            {documentToReactComponents(description.json, options)}
+          </ContentSide>
+          <SideBar>
+            <div>
+              <ProjectTitle>{title}</ProjectTitle>
+              <Preview>{preview}</Preview>
+              <ViewButtons>
+                <a href={githubLink} rel="noopener noreferrer" target="_blank">
+                  <GitLink>View Github</GitLink>
+                </a>
+                <a href={demoLink} rel="noopener noreferrer" target="_blank">
+                  <DemoLink>See Live App</DemoLink>
+                </a>
+              </ViewButtons>
+            </div>
 
-          <TechTags>
-            <PackageBox>Tech Stack:</PackageBox>
-            <TagList>
-              {technology.map((tag, index) => (
-                <div key={index}>
-                  <Tag as={Tag} key={tag} disabled>
-                    {tag}
-                  </Tag>
-                  <TagLine />
-                </div>
-              ))}
-            </TagList>
-          </TechTags>
-        </SideBar>
-      </Grid>
-    </ProjectPageContainer>
+            <TechTags>
+              <PackageBox>Tech Stack:</PackageBox>
+              <TagList>
+                {technology.map((tag, index) => (
+                  <div key={index}>
+                    <Tag as={Tag} key={tag} disabled>
+                      {tag}
+                    </Tag>
+                    <TagLine />
+                  </div>
+                ))}
+              </TagList>
+            </TechTags>
+          </SideBar>
+        </Grid>
+      </ProjectPageContainer>
+    </>
   );
 };
 

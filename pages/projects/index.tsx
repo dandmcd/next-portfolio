@@ -8,6 +8,8 @@ import {
   FeaturedProjectContainer,
   ProjectsContainer,
 } from "../../styles/projectsstyle";
+import HeadSeo from "../../components/HeadSeo";
+import siteMetadata from "../../lib/siteMetadata";
 
 export interface ProjectProps {
   title: string;
@@ -32,23 +34,30 @@ interface Props {
 
 const Projects: NextPage<Props> = ({ preview, allProjects }) => {
   return (
-    <Container>
-      <CommonTitle>Daniel&apos;s Projects</CommonTitle>
-      <FeaturedProjectContainer>
-        {allProjects.map((project) => {
-          return project.featured ? (
-            <FeaturedProject key={project.slug} project={project} />
-          ) : null;
-        })}
-      </FeaturedProjectContainer>
-      <ProjectsContainer>
-        {allProjects.map((project) => {
-          return !project.featured ? (
-            <Project key={project.slug} project={project} />
-          ) : null;
-        })}
-      </ProjectsContainer>
-    </Container>
+    <>
+      <HeadSeo
+        title={`Projects | ${siteMetadata.title} `}
+        description={siteMetadata.description}
+        canonicalUrl={`${siteMetadata.siteUrl}/projects`}
+      />
+      <Container>
+        <CommonTitle>Daniel&apos;s Projects</CommonTitle>
+        <FeaturedProjectContainer>
+          {allProjects.map((project) => {
+            return project.featured ? (
+              <FeaturedProject key={project.slug} project={project} />
+            ) : null;
+          })}
+        </FeaturedProjectContainer>
+        <ProjectsContainer>
+          {allProjects.map((project) => {
+            return !project.featured ? (
+              <Project key={project.slug} project={project} />
+            ) : null;
+          })}
+        </ProjectsContainer>
+      </Container>
+    </>
   );
 };
 
