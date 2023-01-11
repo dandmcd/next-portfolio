@@ -6,6 +6,8 @@ import { CommonTitle } from "../../styles/styledCommon";
 import styled from "styled-components";
 import BlogPagination from "../../components/BlogPagination/BlogPagination";
 import BlogListing from "../../components/BlogListing/BlogListing";
+import HeadSeo from "../../components/HeadSeo";
+import siteMetadata from "../../lib/siteMetadata";
 
 const BlogItem = styled.div`
   display: block;
@@ -44,6 +46,11 @@ interface Props {
 const Blog: NextPage<Props> = ({ posts, currentPage, totalPages }) => {
   return (
     <>
+      <HeadSeo
+        title={`Blog | ${siteMetadata.title} `}
+        description={siteMetadata.description}
+        canonicalUrl={`${siteMetadata.siteUrl}/blog`}
+      />
       <CommonTitle>The Whatever Blog</CommonTitle>
       {posts.map((post) => {
         return (

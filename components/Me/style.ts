@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
-import { CommonTitle } from "../../styles/styledCommon";
+import { CommonButton, CommonTitle } from "../../styles/styledCommon";
 
 export const Cta = styled.div`
   background-color: transparent;
@@ -150,4 +150,12 @@ export const Tools = styled.h2`
   color: #dfc412;
   text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
     -1px 1px 0 #000, 1px 1px 0 #000;
+`;
+
+export const ViewButton = styled(CommonButton)`
+  top: 30px;
+  font-size: 18px;
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    background-color: #f5e269;
+  }
 `;

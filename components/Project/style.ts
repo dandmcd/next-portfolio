@@ -9,8 +9,8 @@ export const Figure = styled.div`
   border-radius: 4px;
   min-width: 420px;
   max-width: 420px;
+  width: 100%;
   height: 360px;
-  width: 48%;
   text-align: center;
   cursor: pointer;
   background: rgb(72, 63, 6);
@@ -19,6 +19,10 @@ export const Figure = styled.div`
     rgba(72, 63, 6, 0.95) 20%,
     rgba(156, 137, 12, 0.9) 100%
   );
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    max-width: 100%;
+    width: 100vw;
+  }
 `;
 
 export const FigCaption = styled.div`
