@@ -14,7 +14,7 @@ export const CommonTitle = styled.h1`
   }
 `;
 
-export const CommonButton = styled.div`
+export const CommonButton = styled.button`
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: button;
   --webkit-mask-image: none;

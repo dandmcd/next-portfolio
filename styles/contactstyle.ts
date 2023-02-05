@@ -91,9 +91,16 @@ export const InputMsg = styled.textarea`
   }
 `;
 
+export const SubmitContainer = styled.div`
+  position: relative;
+  display: flex;
+`;
+
 export const SubmitButton = styled(CommonButton)`
   top: 30px;
   font-size: 18px;
+  :disabled {
+    background-color: white;
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     background-color: #f5e269;
   }

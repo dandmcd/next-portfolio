@@ -123,6 +123,8 @@ export const Intro = styled.h2`
 `;
 
 export const CtaBtns = styled.div`
+  position: relative;
+  text-align: center;
   padding: 2em 2em;
 `;
 

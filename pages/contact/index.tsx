@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { CommonTitle } from "../../styles/styledCommon";
+import { useForm, ValidationError } from "@formspree/react";
+import ContactSubmitted from "../../components/Contact/ContactSubmitted";
 
 import {
   Form,
@@ -13,12 +15,16 @@ import {
   EmailSection,
   EmailDiv,
   EmailButton,
-  ParagraphHidden,
+  SubmitContainer,
 } from "../../styles/contactstyle";
 import HeadSeo from "../../components/HeadSeo";
 import siteMetadata from "../../lib/siteMetadata";
 
 export default function Contact() {
+  const [state, handleSubmit] = useForm("xvonzeje");
+  if (state.succeeded) {
+    return <ContactSubmitted />;
+  }
   return (
     <>
       <HeadSeo
@@ -30,46 +36,52 @@ export default function Contact() {
         <EmailSection>
           <EmailDiv>
             <EmailSmHeader>Contact me by email:</EmailSmHeader>
-            <Link href="mailto:mail@danielmcdermott.me">
-              <EmailButton>mail@danielmcdermott.me</EmailButton>
+            <Link href="mailto:dandmcd@gmail.com">
+              <EmailButton>dandmcd@gmail.com</EmailButton>
             </Link>
           </EmailDiv>
         </EmailSection>
 
-        <Form
-          name="contact"
-          method="POST"
-          netlify-honeypot="bot-field"
-          data-netlify="true"
-        >
+        <Form onSubmit={handleSubmit} name="contact">
           <EmailSmHeader>No time for email? </EmailSmHeader>
           <EmailExSmHeader>
             Fill in the easy contact form below:
           </EmailExSmHeader>
-          <input type="hidden" name="form-name" value="contact" />
-          <ParagraphHidden>
-            <label>
-              Don’t fill this out if you’re human: <input name="bot-field" />
-            </label>
-          </ParagraphHidden>
           <Paragraph>
             <label>
               Your Name: <Input type="text" name="name" />
+              <ValidationError
+                prefix="Name"
+                field="name"
+                errors={state.errors}
+              />
             </label>
           </Paragraph>
           <Paragraph>
             <label>
               Your Email: <Input type="email" name="email" />
+              <ValidationError
+                prefix="Email"
+                field="email"
+                errors={state.errors}
+              />
             </label>
           </Paragraph>
           <Paragraph>
             <label>
-              Message: <InputMsg name="message"></InputMsg>
+              Message: <InputMsg name="message" />
+              <ValidationError
+                prefix="Message"
+                field="message"
+                errors={state.errors}
+              />
             </label>
           </Paragraph>
-          <div>
-            <SubmitButton>Send</SubmitButton>
-          </div>
+          <SubmitContainer>
+            <SubmitButton type="submit" disabled={state.submitting}>
+              Send
+            </SubmitButton>
+          </SubmitContainer>
         </Form>
       </ContactSection>
     </>
