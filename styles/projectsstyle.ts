@@ -40,8 +40,8 @@ export const ContentfulImg = styled.div`
 
 export const Img = styled(Image)`
   height: auto;
-  max-width: 800px;
-  width: 80%;
+  max-width: 80%;
+
   border-radius: 1em;
 `;
 

@@ -1,6 +1,4 @@
-import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { Img, ImgCaption } from "../styles/projectsstyle";
 
 export function RichTextAsset({ id, assets }) {
