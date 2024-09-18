@@ -1,13 +1,17 @@
+// Node modules
 import Link from "next/link";
-import { CommonButton } from "../../styles/styledCommon";
+import Image from "next/image";
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+
+// Components
+import HeadSeo from "../HeadSeo";
+
+// Styled Components
 import {
   Cta,
   Header,
   Wrapper,
   Title,
-  FadeTitle,
-  FadeTitleB,
-  FadeTitleC,
   IntroSection,
   IntroBox,
   Intro,
@@ -16,96 +20,86 @@ import {
   BlogEntry,
   BlogSpan,
   MediaIcons,
-  MediaIcon,
   Social,
   ViewButton,
 } from "./style";
-import linkedin from "../../public/icons/linkedin.png";
-import github from "../../public/icons/github.png";
-import email from "../../public/icons/message.png";
-import selfie from "../../public/computerdan.jpg";
-import { BlogProps } from "../../pages/blog";
-import { NextPage } from "next";
 
-interface Props {
-  blogPost: BlogProps;
-}
+// Hooks
+import useRandomSubtitle from "../../hooks/useRandomSubtitle";
 
-const Me: NextPage<Props> = ({ blogPost }) => {
+// Lib
+import siteMetadata from "../../lib/siteMetadata";
+
+// Types
+import { Document } from '@contentful/rich-text-types';
+import { TypeDmPortfolioBlogFields, TypeHomeFields } from "../../lib/content-types";
+
+const Me = ({ blogPost, content }: { blogPost: TypeDmPortfolioBlogFields, content: TypeHomeFields }) => {
+  const fallbackSubtitles = ["Back To Front", "Dev Ready To Dev Complete"];
+
+  const randomSubtitle = useRandomSubtitle(
+    content?.subtitles?.length ? content.subtitles : fallbackSubtitles
+  );
+
+  const bioHtml = content?.bio ? documentToHtmlString(content?.bio as unknown as Document) : '';
+
   return (
-    <Cta>
-      <Header>
-        <Title>Bringing ideas to life</Title>
-        <Title>
-          <FadeTitle>back</FadeTitle>
-          <FadeTitleB> to</FadeTitleB> <FadeTitleC> front</FadeTitleC>
-        </Title>
-      </Header>
-      <Wrapper>
-        <IntroSection>
-          <Social>
-            <MediaIcons>
-              <a
-                href="https://github.com/givionte"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <MediaIcon
-                  as={MediaIcon}
-                  src={github}
-                  width="32"
-                  height="32"
-                  alt="Github"
-                ></MediaIcon>
-              </a>
-              <Link href="/contact">
-                <MediaIcon
-                  as={MediaIcon}
-                  src={email}
-                  width="32"
-                  height="32"
-                  alt="Email"
-                ></MediaIcon>
-              </Link>
-              <a
-                href="https://www.linkedin.com/in/dandmcd/"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <MediaIcon
-                  as={MediaIcon}
-                  src={linkedin}
-                  width="32"
-                  height="32"
-                  alt="LinkedIn"
-                ></MediaIcon>
-              </a>
-            </MediaIcons>
-            <MeImg as={MeImg} alt="Img" src={selfie} width="150" height="150" />
-          </Social>
-          <IntroBox>
-            <Intro>
-              Hello, I am Daniel McDermott, a software developer majoring in
-              Computer Science. I create full-stack apps using multiple
-              programming languages including TypeScript and Python, along with
-              many of the latest tools such as React and GraphQL.
-            </Intro>
-          </IntroBox>
-        </IntroSection>
+    <>
+      <HeadSeo
+        title="Daniel.Me"
+        description="{content?.metaDescription}"
+        canonicalUrl={siteMetadata.siteUrl}
+      />
+      <Cta>
+        <Header>
+          <Title>{content?.heroTitle}</Title>
+          <Title>{randomSubtitle}</Title>
+        </Header>
+        <Wrapper>
+          <IntroSection>
+            <Social>
+              <MediaIcons>
+                {content?.icons && content.icons.map((icon, index) => (
+                  <Link
+                    key={index}
+                    href={icon.fields.link?.fields.link || "#"}
+                    rel="noopener noreferrer"
+                    target={icon.fields.link?.fields.openInNewTab ? '_blank' : '_self'}
+                  >
+                    <Image
+                      src={`https:${icon.fields.icon?.fields.file.url}`}
+                      width="32"
+                      height="32"
+                      alt={icon.fields.icon?.fields.title || "Icon"}
+                    />
+                  </Link>
+                ))}
+              </MediaIcons>
+              <MeImg as={MeImg} alt="Img" src={`https://${content.profileImage?.fields?.file?.url}` ?? ""} width="150" height="150" priority />
+            </Social>
+            <IntroBox>
+              <Intro
+                dangerouslySetInnerHTML={{
+                  __html: bioHtml,
+                }}
+              />
+            </IntroBox>
+          </IntroSection>
 
-        <CtaBtns>
-          <Link href="/projects">
-            <ViewButton>View My Projects</ViewButton>
-          </Link>
-        </CtaBtns>
-        <BlogEntry>
-          Latest Blog Entry:{" "}
-          <BlogSpan>
-            <Link href={`/blog/${blogPost.slug}`}>{blogPost.title}</Link>
-          </BlogSpan>
-        </BlogEntry>
-      </Wrapper>
-    </Cta>
+          <CtaBtns>
+            <Link href={content.ctaButton?.fields?.link || "#"}>
+              <ViewButton>{content.ctaButton?.fields?.buttonOrLinkText}</ViewButton>
+            </Link>
+          </CtaBtns>
+          <BlogEntry>
+            {content?.latestBlogText}
+            <BlogSpan>
+              <Link href={`/blog/${blogPost?.fields?.slug}`}>{blogPost?.fields?.title}</Link>
+            </BlogSpan>
+          </BlogEntry>
+        </Wrapper>
+      </Cta>
+    </>
   );
 };
 

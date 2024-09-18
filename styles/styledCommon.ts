@@ -26,7 +26,7 @@ export const CommonButton = styled.button`
   outline: none;
   border-radius: 999px;
   border: 0 solid;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
   min-width: 156px;
   line-height: 1.5;

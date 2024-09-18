@@ -1,37 +1,113 @@
-import * as CFRichTextTypes from "@contentful/rich-text-types";
-import * as Contentful from "contentful";
+import type { EntryFieldTypes } from "contentful";
+
+export type AssetProps = {
+  fields: {
+    title: string;
+    description: string;
+    file: {
+      url: string;
+    };
+  };
+};
+export interface TypeBlogFields {
+  entryTitle?: string;
+  heroTitle?: string;
+  metaDescription?: EntryFieldTypes.Text;
+  pageNumberText?: string;
+  icons?: TypeIconsFields[];
+}
+
+export interface TypeButtonOrLinkFields {
+  fields: {
+  entryTitle?: string;
+  buttonOrLinkText?: string;
+  elementType?: string[];
+  link?: string;
+  openInNewTab?: EntryFieldTypes.Boolean;
+}
+}
 
 export interface TypeCodeSnippetsFields {
-  codeSnippet?: Contentful.EntryFields.Text;
+  codeSnippet?: EntryFieldTypes.Text;
 }
 
-export type TypeCodeSnippets = Contentful.Entry<TypeCodeSnippetsFields>;
+export interface TypeContactPageFields {
+  entryTitle?: string;
+  heroTitle?: string;
+  metaDescription?: EntryFieldTypes.Text;
+  icons?: TypeIconsFields[];
+  formHeader?: string;
+  formNameText?: string;
+  formEmailText?: string;
+  formMessageText?: string;
+  sendButton?: TypeButtonOrLinkFields;
+  skillHeader?: string;
+  skillSection1Text?: string;
+  skillList1?: string[];
+  skillSection2Text?: string;
+  skillList2?: string[];
+  skillSection3Text?: string;
+  skillList3?: string[];
+}
 
 export interface TypeDmPortfolioBlogFields {
-  title: Contentful.EntryFields.Symbol;
-  post: CFRichTextTypes.Block | CFRichTextTypes.Inline;
-  images: Contentful.Asset[];
-  featured: Contentful.EntryFields.Boolean;
-  previewText: Contentful.EntryFields.Text;
-  published: Contentful.EntryFields.Date;
-  location?: Contentful.EntryFields.Location;
-  slug: Contentful.EntryFields.Symbol;
-  codeSnippet?: Contentful.EntryFields.Text;
+  fields: {
+  title: string;
+  post: EntryFieldTypes.RichText;
+  images: AssetProps[];
+  featured: EntryFieldTypes.Boolean;
+  previewText: EntryFieldTypes.Text;
+  published: EntryFieldTypes.Date;
+  location?: EntryFieldTypes.Location;
+  slug: string;
+  codeSnippet?: EntryFieldTypes.Text;
+  };
 }
-
-export type TypeDmPortfolioBlog = Contentful.Entry<TypeDmPortfolioBlogFields>;
 
 export interface TypeDmPortfolioProjectsFields {
-  title: Contentful.EntryFields.Symbol;
-  description: CFRichTextTypes.Block | CFRichTextTypes.Inline;
-  preview: Contentful.EntryFields.Text;
-  technology: Contentful.EntryFields.Symbol[];
-  images: Contentful.Asset[];
-  featured: Contentful.EntryFields.Boolean;
-  slug: Contentful.EntryFields.Symbol;
-  githubLink?: Contentful.EntryFields.Symbol;
-  demoLink?: Contentful.EntryFields.Symbol;
+  title: string;
+  description: EntryFieldTypes.RichText;
+  preview: EntryFieldTypes.Text;
+  technology: string[];
+  images: AssetProps[];
+  featured: EntryFieldTypes.Boolean;
+  slug: string;
+  githubLink?: string;
+  demoLink?: string;
 }
 
-export type TypeDmPortfolioProjects =
-  Contentful.Entry<TypeDmPortfolioProjectsFields>;
+export interface TypeHomeFields {
+  entryTitle?: string;
+  heroTitle?: string;
+  metaDescription?: EntryFieldTypes.Text;
+  subtitles?: string[];
+  icons?: TypeIconsFields[];
+  profileImage?: AssetProps;
+  bio?: EntryFieldTypes.RichText;
+  latestBlogText?: string;
+  ctaButton?: TypeButtonOrLinkFields;
+}
+
+export interface TypeIconsFields {
+  fields: {
+  entryTitle?: string;
+  icon?: AssetProps;
+  iconText?: string;
+  link?: TypeButtonOrLinkFields;
+}
+}
+
+export interface TypeMenuFields {
+  entryTitle?: string;
+  links?: TypeButtonOrLinkFields[];
+}
+
+export interface TypeSingleBlogPageFields {
+  blogPostTitle?: string;
+  slug?: string;
+  blogPost?: EntryFieldTypes.RichText;
+  featuredImage?: AssetProps;
+  previewText?: EntryFieldTypes.Text;
+  goBackText?: string;
+}
+

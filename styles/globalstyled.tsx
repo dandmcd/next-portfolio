@@ -33,7 +33,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     color: #111;
     outline: none;
-    background-color: #DFC412;
+    background-color: #fff;
   }
   button {
     font-family: "Barlow Semi Condensed", sans-serif;

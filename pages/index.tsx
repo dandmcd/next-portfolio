@@ -1,34 +1,16 @@
-import { NextPage } from "next";
-import HeadSeo from "../components/HeadSeo";
 import Me from "../components/Me/Me";
-import { getMostRecentBlogPost } from "../lib/api";
-import siteMetadata from "../lib/siteMetadata";
-import { BlogProps } from "./blog";
+import { getMostRecentBlogPost, getPageContent } from "../lib/api";
+import { CONTENTFUL_PAGE_IDS } from "../lib/contentfulPages";
 
-interface Props {
-  preview: boolean;
-  blogPost: BlogProps;
-}
+export const getStaticProps = async () => {
+  const content = await getPageContent(CONTENTFUL_PAGE_IDS.home);
 
-const Home: NextPage<Props> = ({ preview, blogPost }) => {
-  return (
-    <>
-      <HeadSeo
-        title="Daniel.Me"
-        description="Bringing ideas to life back to front"
-        canonicalUrl={siteMetadata.siteUrl}
-      />
-      <Me blogPost={blogPost} />
-    </>
-  );
-};
-
-export const getStaticProps = async ({ preview = false }) => {
   const blogPost = (await getMostRecentBlogPost()) ?? [];
+
   return {
-    props: { preview, blogPost },
+    props: { blogPost, content },
     revalidate: 30,
   };
 };
 
-export default Home;
+export default Me;
