@@ -1,0 +1,189 @@
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+
+
+.th, .td {
+  padding: 16px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.th {
+  color: #fff;
+  background-color: #6200ea;
+  font-weight: bold;
+  border-radius: 12px 12px 0 0;
+}
+
+.tr {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.onlineYes {
+  background-color: #b8e0d2;
+  color: #004d40;
+  border-radius: 12px;
+}
+
+.occupiedYes {
+  background-color: #ffadad;
+  color: #fff;
+  border-radius: 12px;
+}
+
+.unoccupied {
+  background-color: #e8f4ea;
+  color: #004d40;
+  border-radius: 12px;
+}
+
+.underMaintenance, .offline {
+  background-color: #c5c6d0;
+  color: #455a64;
+  border-radius: 12px;
+}
+
+.lowTime {
+  background-color: #FDFD96;
+  color: #000;
+  border-radius: 12px;
+}
+
+.td {
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.td:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.td:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.table-container {
+  padding: 20px;
+}
+
+.header {
+  font-family: 'Roboto', sans-serif;
+  color: #6200ea;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Popover container */
+.popover {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 1000;
+  display: none; /* Hidden by default */
+}
+
+.popover.visible {
+  display: block; /* Show when visible */
+}
+
+.popover-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popover-content button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.popover-content button:hover {
+  background-color: #0056b3;
+}
+
+/* Close button */
+.close-popover {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.reserveButton {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.reserveButton:hover {
+  background-color: #0056b3;
+}
+
+.reserveForm {
+  margin: 20px 0;
+}
+
+.reserveForm label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.reserveForm input,
+.reserveForm select {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.reserveForm button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.reserveForm button:hover {
+  background-color: #218838;
+}
+
+.reservationResult {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+  border-radius: 5px;
+}
