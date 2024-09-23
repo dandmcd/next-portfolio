@@ -75,7 +75,18 @@ const Me = ({ blogPost, content }: { blogPost: TypeDmPortfolioBlogFields, conten
                   </Link>
                 ))}
               </MediaIcons>
-              <MeImg as={MeImg} alt="Img" src={`https://${content.profileImage?.fields?.file?.url}` ?? ""} width="150" height="150" priority />
+              <MeImg
+                as={MeImg}
+                alt="Img"
+                src={
+                  content.profileImage?.fields?.file?.url
+                    ? `https://${content.profileImage.fields.file.url}`
+                    : ""
+                }
+                width="150"
+                height="150"
+                priority
+              />
             </Social>
             <IntroBox>
               <Intro
