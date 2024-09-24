@@ -116,7 +116,7 @@ export const getStaticProps = async ({
   params: Params;
   preview: boolean;
 }) => {
-  const data = await getPost(params.slug, preview);
+  const data = await getPost(params.slug);
   return {
     props: {
       preview,
@@ -126,9 +126,9 @@ export const getStaticProps = async ({
 };
 
 export async function getStaticPaths() {
-  const allPosts: BlogProps[] = await getAllPostsWithSlug();
+  const allPosts = await getAllPostsWithSlug();
   return {
-    paths: allPosts?.map(({ slug }) => `/blog/${slug}`) ?? [],
+    paths: allPosts.map(({ fields }) => `/blog/${fields.slug}`),
     fallback: false,
   };
 }
