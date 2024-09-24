@@ -61,10 +61,10 @@ const Projects: NextPage<Props> = ({ preview, allProjects }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
-  const allProjects: ProjectProps[] = (await getAllProjects(preview)) ?? [];
+export async function getStaticPaths() {
+  const allProjects = (await getAllProjects());
   return {
-    props: { preview, allProjects: allProjects },
+    props: { allProjects: allProjects },
   };
 };
 

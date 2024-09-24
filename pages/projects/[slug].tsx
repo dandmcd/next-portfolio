@@ -1,6 +1,6 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
-import { GetStaticPaths, NextPage } from "next";
+import { NextPage } from "next";
 import { ProjectProps } from ".";
 import HeadSeo from "../../components/HeadSeo";
 import { RichTextAsset } from "../../components/rich-text-asset";
@@ -92,7 +92,7 @@ const ProjectPage: NextPage<Props> = ({ post }) => {
               <TagList>
                 {technology.map((tag, index) => (
                   <div key={index}>
-                    <Tag as={Tag} key={tag} disabled>
+                    <Tag key={tag}>
                       {tag}
                     </Tag>
                     <TagLine />
@@ -120,7 +120,7 @@ export const getStaticProps = async ({
   params: Params;
   preview: boolean;
 }) => {
-  const data = await getProject(params.slug, preview);
+  const data = await getProject(params.slug);
   return {
     props: {
       preview,
@@ -129,10 +129,10 @@ export const getStaticProps = async ({
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const allProjects: ProjectProps[] = await getAllProjectsWithSlug();
+export async function getStaticPaths() {
+  const allProjects = await getAllProjectsWithSlug();
   return {
-    paths: allProjects?.map(({ slug }) => `/projects/${slug}`) ?? [],
+    paths: allProjects?.map(({ fields }) => `/projects/${fields.slug}`),
     fallback: false,
   };
 };
