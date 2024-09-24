@@ -5,7 +5,7 @@ import BlogListing from "../../../components/BlogListing/BlogListing";
 import BlogPagination from "../../../components/BlogPagination/BlogPagination";
 import HeadSeo from "../../../components/HeadSeo";
 import {
-  getoTotalBlogPosts,
+  getTotalBlogPosts,
   getPaginatedPostSummaries,
 } from "../../../lib/api";
 import { Config } from "../../../lib/pagination";
@@ -77,7 +77,7 @@ export const getStaticProps = async ({
 };
 
 export async function getStaticPaths() {
-  const totalPosts = await getoTotalBlogPosts();
+  const totalPosts = await getTotalBlogPosts();
   const totalPages = Math.ceil(totalPosts / Config.pagination.pageSize);
 
   const paths = [];
