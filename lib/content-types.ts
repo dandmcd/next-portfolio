@@ -65,15 +65,17 @@ export interface TypeDmPortfolioBlogFields {
 }
 
 export interface TypeDmPortfolioProjectsFields {
+  fields: {
   title: string;
   description: EntryFieldTypes.RichText;
-  preview: EntryFieldTypes.Text;
+  preview: string;
   technology: string[];
   images: AssetProps[];
   featured: EntryFieldTypes.Boolean;
   slug: string;
   githubLink?: string;
   demoLink?: string;
+  };
 }
 
 export interface TypeHomeFields {

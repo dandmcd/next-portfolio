@@ -10,13 +10,14 @@ import {
   ProjectImg,
   ProjectDescription,
 } from "./style";
+import { TypeDmPortfolioProjectsFields } from "../../lib/content-types";
 
 const FeaturedProject = ({
   project,
 }: {
-  project: ProjectProps;
+  project: TypeDmPortfolioProjectsFields;
 }): JSX.Element => {
-  const { title, slug, preview, imagesCollection } = project;
+  const { title, slug, preview, images } = project.fields;
   return (
     <>
       <Link href={`/projects/${slug}`}>
@@ -31,7 +32,7 @@ const FeaturedProject = ({
           <div>
             <ProjectImg
               as={ProjectImg}
-              src={imagesCollection.items[0].url}
+              src={`https:${images[0].fields.file.url}`}
               fill
               alt={title}
             />

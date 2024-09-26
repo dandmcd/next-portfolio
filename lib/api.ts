@@ -81,9 +81,7 @@ export async function getPaginatedPostSummaries(
   return response;
 }
 
-export async function getAllProjectsWithSlug()
-
- {
+export async function getAllProjectsWithSlug() {
   const response = await client.getEntries({
     content_type: 'dmPortfolioProjects',
     'fields.slug[exists]': true,

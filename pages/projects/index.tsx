@@ -10,6 +10,7 @@ import {
 } from "../../styles/projectsstyle";
 import HeadSeo from "../../components/HeadSeo";
 import siteMetadata from "../../lib/siteMetadata";
+import { TypeDmPortfolioProjectsFields } from "../../lib/content-types";
 
 export interface ProjectProps {
   title: string;
@@ -29,10 +30,10 @@ export interface ProjectProps {
 
 interface Props {
   preview: boolean;
-  allProjects: ProjectProps[];
+  allProjects: TypeDmPortfolioProjectsFields[];
 }
 
-const Projects: NextPage<Props> = ({ preview, allProjects }) => {
+const Projects: NextPage<Props> = ({ allProjects }) => {
   return (
     <>
       <HeadSeo
@@ -44,15 +45,15 @@ const Projects: NextPage<Props> = ({ preview, allProjects }) => {
         <CommonTitle>Daniel&apos;s Projects</CommonTitle>
         <FeaturedProjectContainer>
           {allProjects.map((project) => {
-            return project.featured ? (
-              <FeaturedProject key={project.slug} project={project} />
+            return project.fields.featured ? (
+              <FeaturedProject key={project.fields.slug} project={project} />
             ) : null;
           })}
         </FeaturedProjectContainer>
         <ProjectsContainer>
           {allProjects.map((project) => {
-            return !project.featured ? (
-              <Project key={project.slug} project={project} />
+            return !project.fields.featured ? (
+              <Project key={project.fields.slug} project={project} />
             ) : null;
           })}
         </ProjectsContainer>
@@ -61,8 +62,8 @@ const Projects: NextPage<Props> = ({ preview, allProjects }) => {
   );
 };
 
-export async function getStaticPaths() {
-  const allProjects = (await getAllProjects());
+export const getStaticProps: GetStaticProps = async () => {
+  const allProjects = (await getAllProjects()) ?? [];
   return {
     props: { allProjects: allProjects },
   };

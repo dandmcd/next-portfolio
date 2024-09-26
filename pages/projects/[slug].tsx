@@ -1,7 +1,6 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, Document } from "@contentful/rich-text-types";
 import { NextPage } from "next";
-import { ProjectProps } from ".";
 import HeadSeo from "../../components/HeadSeo";
 import { RichTextAsset } from "../../components/rich-text-asset";
 import { getAllProjectsWithSlug, getProject } from "../../lib/api";
@@ -25,9 +24,10 @@ import {
   TechTags,
   ViewButtons,
 } from "../../styles/projectsstyle";
+import { TypeDmPortfolioProjectsFields } from "../../lib/content-types";
 
 interface Props {
-  post: ProjectProps;
+  post: TypeDmPortfolioProjectsFields;
 }
 
 const ProjectPage: NextPage<Props> = ({ post }) => {
@@ -39,17 +39,14 @@ const ProjectPage: NextPage<Props> = ({ post }) => {
     preview,
     githubLink,
     demoLink,
-    imagesCollection,
-  } = post;
+  } = post?.fields;
   const options = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+        const fields = node.data.target.fields;
         return (
           <ContentfulImg>
-            <RichTextAsset
-              id={node.data.target.sys.id}
-              assets={imagesCollection.items}
-            />
+            <RichTextAsset fields={fields} />
           </ContentfulImg>
         );
       },
@@ -71,7 +68,7 @@ const ProjectPage: NextPage<Props> = ({ post }) => {
       <ProjectPageContainer>
         <Grid>
           <ContentSide>
-            {documentToReactComponents(description.json, options)}
+            {documentToReactComponents(description as unknown as Document, options)}
           </ContentSide>
           <SideBar>
             <div>
@@ -90,7 +87,7 @@ const ProjectPage: NextPage<Props> = ({ post }) => {
             <TechTags>
               <PackageBox>Tech Stack:</PackageBox>
               <TagList>
-                {technology.map((tag, index) => (
+                {technology && technology.map((tag, index) => (
                   <div key={index}>
                     <Tag key={tag}>
                       {tag}
@@ -132,7 +129,7 @@ export const getStaticProps = async ({
 export async function getStaticPaths() {
   const allProjects = await getAllProjectsWithSlug();
   return {
-    paths: allProjects?.map(({ fields }) => `/projects/${fields.slug}`),
+    paths: allProjects.map((project) => `/projects/${project.fields.slug}`),
     fallback: false,
   };
 };

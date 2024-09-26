@@ -29,7 +29,6 @@ interface Props {
 }
 
 const BlogPage: NextPage<Props> = ({ post }) => {
-  console.log(post);
   const { title, published, slug, post: postContent } = post.fields;
 
   const goBack = () => {

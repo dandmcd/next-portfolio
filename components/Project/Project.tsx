@@ -1,7 +1,4 @@
-import { NextComponentType, NextPage } from "next";
 import Link from "next/link";
-import React, { FC } from "react";
-import { ProjectProps } from "../../pages/projects";
 import {
   Figure,
   FigCaption,
@@ -10,9 +7,11 @@ import {
   ProjectImg,
   ProjectDescription,
 } from "./style";
+import { TypeDmPortfolioProjectsFields } from "../../lib/content-types";
 
-const Project = ({ project }: { project: ProjectProps }): JSX.Element => {
-  const { title, slug, featured, preview, imagesCollection } = project;
+const Project = ({ project }: { project: TypeDmPortfolioProjectsFields }): JSX.Element => {
+  const { title, slug, preview, images } = project.fields;
+
   return (
     <>
       <Link href={`/projects/${slug}`}>
@@ -25,7 +24,7 @@ const Project = ({ project }: { project: ProjectProps }): JSX.Element => {
           <div>
             <ProjectImg
               as={ProjectImg}
-              src={imagesCollection.items[0].url}
+              src={`https:${images[0]?.fields?.file?.url}`}
               fill
               alt={title}
             />
