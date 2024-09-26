@@ -8,19 +8,21 @@ const md = new MarkdownIt({
 });
 
 const CodeSnippet = ({
-  id,
-  markdown,
+  code,
 }: {
-  id: string;
-  markdown: any;
+  code: string;
 }): JSX.Element => {
-  const mkd = markdown?.find((m: any) => m.sys.id === id.toString());
+  // Highlight the code using Prism.js after the component mounts
   useEffect(() => {
     Prism.highlightAll();
-  });
+  }, []);
+
+  if (!code) {
+    return <div />;
+  }
 
   return (
-    <div dangerouslySetInnerHTML={{ __html: md.render(mkd.codeSnippet) }} />
+    <div dangerouslySetInnerHTML={{ __html: md.render(code) }} />
   );
 };
 

@@ -1,8 +1,8 @@
 import { format } from "date-fns";
 import { getAllPostsWithSlug, getPost } from "../../lib/api";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS, INLINES } from "@contentful/rich-text-types";
-import { RichTextAsset, RichTextEntry } from "../../components/rich-text-asset";
+import { BLOCKS, Document } from "@contentful/rich-text-types";
+import { RichTextAsset } from "../../components/rich-text-asset";
 
 import {
   ContentfulImg,
@@ -19,17 +19,19 @@ import {
   ContentWrapper,
 } from "../../styles/slugstyle";
 import CodeSnippet from "../../components/CodeSnippet";
-import { BlogProps } from ".";
 import { NextPage } from "next";
 import HeadSeo from "../../components/HeadSeo";
 import siteMetadata from "../../lib/siteMetadata";
+import { TypeDmPortfolioBlogFields } from "../../lib/content-types";
 
 interface Props {
-  post: BlogProps;
+  post: TypeDmPortfolioBlogFields;
 }
 
 const BlogPage: NextPage<Props> = ({ post }) => {
-  const { title, published, imagesCollection, post: postContent } = post;
+  console.log(post);
+  const { title, published, slug, post: postContent } = post.fields;
+
   const goBack = () => {
     window.history.back();
   };
@@ -43,35 +45,25 @@ const BlogPage: NextPage<Props> = ({ post }) => {
         <ContentfulP>{children}</ContentfulP>
       ),
       [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+        const fields = node.data.target.fields;
         return (
           <ContentfulImg>
-            <RichTextAsset
-              id={node.data.target.sys.id}
-              assets={imagesCollection.items}
-            />
+            <RichTextAsset fields={fields} />
           </ContentfulImg>
         );
       },
       [BLOCKS.EMBEDDED_ENTRY]: (node: any) => {
-        return (
-          <CodeBlock>
-            <CodeSnippet
-              id={node.data.target.sys.id}
-              markdown={postContent.links.entries.block}
-            />
-          </CodeBlock>
-        );
-      },
-      [INLINES.ENTRY_HYPERLINK]: (node: any, children: any) => {
-        return (
-          <>
-            <RichTextEntry
-              id={node.data.target.sys.id}
-              entries={postContent.links.entries.hyperlink}
-              child={children[0]}
-            />
-          </>
-        );
+        const { fields } = node.data.target;
+
+        if (fields?.codeSnippet) {
+          return (
+            <CodeBlock>
+              <CodeSnippet code={fields.codeSnippet} />
+            </CodeBlock>
+          );
+        }
+
+        return null;
       },
     },
   };
@@ -79,18 +71,18 @@ const BlogPage: NextPage<Props> = ({ post }) => {
   return (
     <>
       <HeadSeo
-        title={`${post.title} | ${siteMetadata.title} `}
-        canonicalUrl={`${siteMetadata.siteUrl}/blog/${post.slug}`}
+        title={`${title} | ${siteMetadata.title}`}
+        canonicalUrl={`${siteMetadata.siteUrl}/blog/${slug}`}
       />
       <Wrapper>
         <BlogTitle>{title}</BlogTitle>
+
         <ContentWrapper>
           <UpdatedAt>
-            Date: {format(new Date(published), "MM/dd/yyyy")}
+            Date: {format(new Date(published as unknown as string), "MM/dd/yyyy")}
           </UpdatedAt>
           <Content>
-            {postContent &&
-              documentToReactComponents(postContent.json, options)}
+            {postContent && documentToReactComponents(postContent as unknown as Document, options)}
           </Content>
         </ContentWrapper>
       </Wrapper>
@@ -127,8 +119,9 @@ export const getStaticProps = async ({
 
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug();
+
   return {
-    paths: allPosts.map(({ fields }) => `/blog/${fields.slug}`),
+    paths: allPosts.map((post) => `/blog/${post.fields.slug}`),
     fallback: false,
   };
 }

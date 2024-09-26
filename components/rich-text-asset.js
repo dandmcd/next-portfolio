@@ -1,18 +1,19 @@
 import Link from "next/link";
 import { Img, ImgCaption } from "../styles/projectsstyle";
 
-export function RichTextAsset({ id, assets }) {
-  const asset = assets?.find((asset) => asset.sys.id === id.toString());
-  if (asset?.url) {
+export function RichTextAsset({ fields }) {
+  const { file, title, description } = fields;
+
+  if (file?.url) {
     return (
       <>
         <Img
-          src={asset.url}
-          width={asset.width}
-          height={asset.height}
-          alt={asset.description}
+          src={`https:${file.url}`}
+          width={file.details.image.width}
+          height={file.details.image.height}
+          alt={description || title}
         />
-        <ImgCaption>{asset.title}</ImgCaption>
+        <ImgCaption>{title}</ImgCaption>
       </>
     );
   }
