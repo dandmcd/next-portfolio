@@ -66,6 +66,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const allProjects = (await getAllProjects()) ?? [];
   return {
     props: { allProjects: allProjects },
+    revalidate: 300,
   };
 };
 

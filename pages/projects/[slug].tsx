@@ -123,6 +123,7 @@ export const getStaticProps = async ({
       preview,
       post: data ?? null,
     },
+    revalidate: 300,
   };
 };
 

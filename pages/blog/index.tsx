@@ -68,5 +68,6 @@ export const getStaticProps = async ({ preview = false }) => {
   const totalPages = Math.ceil(posts.total / Config.pagination.pageSize);
   return {
     props: { posts: posts.items, totalPages, currentPage: "1" },
+    revalidate: 300,
   };
 };
