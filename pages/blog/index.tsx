@@ -8,18 +8,14 @@ import BlogPagination from "../../components/BlogPagination/BlogPagination";
 import BlogListing from "../../components/BlogListing/BlogListing";
 import HeadSeo from "../../components/HeadSeo";
 import siteMetadata from "../../lib/siteMetadata";
+import { TypeDmPortfolioBlogFields } from "../../lib/content-types";
 
-const BlogItem = styled.div`
+const BlogItem = styled.div<{ isEven: boolean }>`
   display: block;
   border-radius: 1em;
   max-width: 1024px;
   margin: 1em auto 0 auto;
-  :nth-child(odd) {
-    background-color: #f5e269;
-  }
-  :nth-child(even) {
-    background-color: #f9efac;
-  }
+  background-color: ${({ isEven }) => (isEven ? "#f9efac" : "#f5e269")};
 `;
 
 export interface BlogProps {
@@ -38,7 +34,7 @@ export interface BlogProps {
 }
 
 interface Props {
-  posts: BlogProps[];
+  posts: TypeDmPortfolioBlogFields[];
   currentPage: string;
   totalPages: number;
 }
@@ -52,10 +48,11 @@ const Blog: NextPage<Props> = ({ posts, currentPage, totalPages }) => {
         canonicalUrl={`${siteMetadata.siteUrl}/blog`}
       />
       <CommonTitle>The Whatever Blog</CommonTitle>
-      {posts.map((post) => {
+      {posts.map((post, index) => {
+        const isEven = index % 2 === 0;
         return (
-          <BlogItem key={post.contentful_id}>
-            <BlogListing key={post.slug} blog={post} />
+          <BlogItem key={post.sys.id} isEven={isEven}>
+            <BlogListing key={post.fields.slug} blog={post} />
           </BlogItem>
         );
       })}

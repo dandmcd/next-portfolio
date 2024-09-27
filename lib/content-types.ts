@@ -56,12 +56,16 @@ export interface TypeDmPortfolioBlogFields {
   post: EntryFieldTypes.RichText;
   images: AssetProps[];
   featured: EntryFieldTypes.Boolean;
-  previewText: EntryFieldTypes.Text;
+  previewText: string;
   published: EntryFieldTypes.Date;
   location?: EntryFieldTypes.Location;
   slug: string;
   codeSnippet?: EntryFieldTypes.Text;
-  };
+  },
+  sys: {
+    id: string;
+    updatedAt: string;
+  }
 }
 
 export interface TypeDmPortfolioProjectsFields {
