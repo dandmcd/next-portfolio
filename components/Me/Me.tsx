@@ -53,7 +53,7 @@ const Me = ({ blogPost, content }: { blogPost: TypeDmPortfolioBlogFields, conten
       <Cta>
         <Header>
           <Title>{content?.heroTitle}</Title>
-          <Title>{randomSubtitle}</Title>
+          <Title subtitle>{randomSubtitle}</Title>
         </Header>
         <Wrapper>
           <IntroSection>
@@ -78,11 +78,7 @@ const Me = ({ blogPost, content }: { blogPost: TypeDmPortfolioBlogFields, conten
               <MeImg
                 as={MeImg}
                 alt="Img"
-                src={
-                  content.profileImage?.fields?.file?.url
-                    ? `https://${content.profileImage.fields.file.url}`
-                    : ""
-                }
+                src={`https:${content.profileImage?.fields?.file?.url}`}
                 width="150"
                 height="150"
                 priority

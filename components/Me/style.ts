@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 import { CommonButton, CommonTitle } from "../../styles/styledCommon";
+import { HTMLAttributes } from "react";
 
 export const Cta = styled.div`
   background-color: transparent;
@@ -13,11 +14,16 @@ export const Header = styled.header`
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
 `;
 
-export const Title = styled(CommonTitle)`
+interface TitleProps extends HTMLAttributes<HTMLHeadingElement> {
+  subtitle?: boolean;
+}
+
+export const Title = styled(CommonTitle)<TitleProps>`
   background-color: white;
   line-height: 1;
   text-align: center;
   font-size: 96px;
+  font-weight: ${(props) => (props.subtitle ? 600 : 800)};
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     font-size: 60px;
   }
