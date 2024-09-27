@@ -70,6 +70,7 @@ export const getStaticProps = async ({
       totalPages,
       currentPage: params.page,
     },
+    revalidate: 300,
   };
 };
 
