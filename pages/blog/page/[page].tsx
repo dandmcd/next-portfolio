@@ -5,28 +5,24 @@ import BlogListing from "../../../components/BlogListing/BlogListing";
 import BlogPagination from "../../../components/BlogPagination/BlogPagination";
 import HeadSeo from "../../../components/HeadSeo";
 import {
-  getoTotalBlogPosts,
+  getTotalBlogPosts,
   getPaginatedPostSummaries,
 } from "../../../lib/api";
 import { Config } from "../../../lib/pagination";
 import siteMetadata from "../../../lib/siteMetadata";
 import { CommonTitle } from "../../../styles/styledCommon";
+import { TypeDmPortfolioBlogFields } from "../../../lib/content-types";
 
-const BlogItem = styled.div`
+const BlogItem = styled.div<{ isEven: boolean }>`
   display: block;
   border-radius: 1em;
   max-width: 1024px;
   margin: 1em auto 0 auto;
-  :nth-child(odd) {
-    background-color: #f5e269;
-  }
-  :nth-child(even) {
-    background-color: #f9efac;
-  }
+  background-color: ${({ isEven }) => (isEven ? "#f9efac" : "#f5e269")};
 `;
 
 interface Props {
-  posts: BlogProps[];
+  posts: TypeDmPortfolioBlogFields[];
   currentPage: string;
   totalPages: number;
 }
@@ -39,10 +35,11 @@ const BlogIndexPage: NextPage<Props> = ({ posts, totalPages, currentPage }) => {
         canonicalUrl={`${siteMetadata.siteUrl}/blog/page/${currentPage}`}
       />
       <CommonTitle>The Whatever Blog</CommonTitle>
-      {posts.map((post) => {
+      {posts.map((post, index) => {
+        const isEven = index % 2 === 0;
         return (
-          <BlogItem key={post.contentful_id}>
-            <BlogListing key={post.slug} blog={post} />
+          <BlogItem key={post.sys.id} isEven={isEven}>
+            <BlogListing key={post.fields.slug} blog={post} />
           </BlogItem>
         );
       })}
@@ -77,7 +74,7 @@ export const getStaticProps = async ({
 };
 
 export async function getStaticPaths() {
-  const totalPosts = await getoTotalBlogPosts();
+  const totalPosts = await getTotalBlogPosts();
   const totalPages = Math.ceil(totalPosts / Config.pagination.pageSize);
 
   const paths = [];

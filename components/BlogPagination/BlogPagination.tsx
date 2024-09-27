@@ -8,7 +8,6 @@ interface Props {
 }
 
 const BlogPagination: NextPage<Props> = ({ currentPage, totalPages }) => {
-  console.log(typeof currentPage, typeof totalPages);
   const isFirst = currentPage == "1";
   const isLast = currentPage == totalPages.toString();
   const prevPage =

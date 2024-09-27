@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Link from "next/link";
 import React, { memo } from "react";
-import { BlogProps } from "../../pages/blog";
+import { format } from "date-fns";
 
 import {
   Grid,
@@ -13,25 +13,28 @@ import {
   ViewMore,
   ImgCell,
 } from "./style";
+import { TypeDmPortfolioBlogFields } from "../../lib/content-types";
 
 interface Props {
-  blog: BlogProps;
+  blog: TypeDmPortfolioBlogFields;
 }
 
 const BlogListing: NextPage<Props> = ({ blog }) => {
-  const { slug, title, imagesCollection, previewText, updatedAt } = blog;
-  const image = imagesCollection.items[0];
+  const { slug, title, images, previewText } = blog.fields;
+  const { updatedAt } = blog.sys;
+  
+  const image = images[0];
   return (
     <>
       <Grid>
         <ImgCell>
-          <BlogImg as={BlogImg} src={image.url} fill alt="test" />
+          <BlogImg as={BlogImg} src={`https:${image.fields.file.url}`} fill alt="test" />
         </ImgCell>
         <TextFields>
           <Title>
             <Link href={`/blog/${slug}`}>{title}</Link>
           </Title>
-          <UpdatedAt>{updatedAt}</UpdatedAt>
+          <UpdatedAt>{format(new Date(updatedAt), "MMMM do, yyyy")}</UpdatedAt>
           <Preview>{previewText}</Preview>
           <ViewMore>
             <Link href={`/blog/${slug}`}>View More</Link>

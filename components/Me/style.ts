@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 import { CommonButton, CommonTitle } from "../../styles/styledCommon";
+import { HTMLAttributes } from "react";
 
 export const Cta = styled.div`
   background-color: transparent;
@@ -13,11 +14,16 @@ export const Header = styled.header`
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
 `;
 
-export const Title = styled(CommonTitle)`
+interface TitleProps extends HTMLAttributes<HTMLHeadingElement> {
+  subtitle?: boolean;
+}
+
+export const Title = styled(CommonTitle)<TitleProps>`
   background-color: white;
   line-height: 1;
   text-align: center;
   font-size: 96px;
+  font-weight: ${(props) => (props.subtitle ? 600 : 800)};
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     font-size: 60px;
   }
@@ -48,7 +54,7 @@ export const Wrapper = styled.main`
   padding: 20px;
   border-radius: 1em;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(to right, rgba(223, 196, 18, 0.2), rgba(223, 196, 18, 0.5));
   width: 70vw;
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     width: 80vw;
@@ -144,6 +150,14 @@ export const BlogSpan = styled.span`
   font-weight: 400;
   text-shadow: none;
   text-indent: 1em;
+  a {
+    text-decoration: underline;
+    text-underline-offset: .4rem;
+    color: #16140f;
+  }
+  a:hover {
+    color: #B28900;
+  }
 `;
 
 export const Tools = styled.h2`
@@ -156,8 +170,9 @@ export const Tools = styled.h2`
 
 export const ViewButton = styled(CommonButton)`
   top: 30px;
-  font-size: 18px;
+  font-size: 28px;
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     background-color: #f5e269;
+    font-size: 20px;
   }
 `;

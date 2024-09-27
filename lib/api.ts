@@ -1,255 +1,110 @@
-import {
-  TypeDmPortfolioBlogFields,
-  TypeDmPortfolioProjectsFields,
-} from "./content-types";
-import { Config } from "./pagination";
+import { createClient } from 'contentful';
+import { Config } from './pagination';
+import { TypeHomeFields } from './content-types';
 
-const PROJECT_FIELDS = `
-slug
-title
-featured
-preview
-technology
-githubLink
-demoLink
-description {
-  json
-}
-imagesCollection {
-  items {
-    sys {
-      id
-    }
-    url
-    title
-    width
-    height
-  }
-}
-`;
-
-const BLOG_FIELDS = `
-items {
-  post {
-    json
-  }
-  slug
-  title
-  featured
-  previewText
-  published
-  codeSnippet
-  imagesCollection {
-    items {
-      sys {
-        id
-      }
-      url
-      title
-      width
-      height
-    }
-  }
-}
-`;
-
-const SINGLE_BLOG_FIELDS = `
-items {
-  post {
-    json
-    links {
-      entries {
-        block {
-          __typename
-          ... on CodeSnippets {
-            codeSnippet
-          }
-          sys {
-            id
-          }
-        }
-        hyperlink {
-          __typename
-          ... on DmPortfolioBlog {
-            slug
-          }
-          ... on DmPortfolioProjects {
-            slug
-          }
-          sys {
-            id
-          }
-        }
-      }
-      assets {
-        hyperlink {
-          sys {
-            id
-          }
-          url
-        }
-        block {
-          sys {
-            id
-          }
-          url
-        }
-      }
-    }
-  }
-  slug
-  title
-  featured
-  previewText
-  published
-  imagesCollection {
-    items {
-      sys {
-        id
-      }
-      url
-      title
-      width
-      height
-    }
-  }
-}
-`;
-
-async function fetchGraphQL(query: string, preview = false) {
-  return fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          preview
-            ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
-            : process.env.CONTENTFUL_ACCESS_TOKEN
-        }`,
-      },
-      body: JSON.stringify({ query }),
-    }
-  ).then((response) => response.json());
+if (
+  !process.env.CONTENTFUL_SPACE_ID ||
+  !process.env.CONTENTFUL_ACCESS_TOKEN ||
+  !process.env.CONTENTFUL_ENVIRONMENT
+) {
+  throw new Error("Contentful configuration error.");
 }
 
-function extractPost(fetchResponse: any, collection: string) {
-  return fetchResponse?.data?.[collection]?.items?.[0];
-}
+const client = createClient({
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  environment: process.env. CONTENTFUL_ENVIRONMENT,
+});
 
-function extractPostEntries(fetchResponse: any, collection: string) {
-  return fetchResponse?.data?.[collection]?.items;
-}
+export const getPageContent = async (
+  entryId: string,
+): Promise<TypeHomeFields> => {
+  const content = await client.getEntry(entryId, {
+    include: 10,
+  });
 
-export async function getoTotalBlogPosts() {
-  const query = await fetchGraphQL(
-    `
-    query {
-      dmPortfolioBlogCollection {
-        total
-      }
-    }
-    `
-  );
-  const totalPosts = query.data.dmPortfolioBlogCollection.total;
-  return totalPosts;
+  return content.fields;
+};
+
+export async function getTotalBlogPosts(): Promise<number> {
+  const response = await client.getEntries({
+    content_type: 'dmPortfolioBlog',
+    select: ['sys.id'],
+  });
+  return response.total;
 }
 
 export async function getMostRecentBlogPost() {
-  const entries: TypeDmPortfolioBlogFields = await fetchGraphQL(
-    `query {
-      dmPortfolioBlogCollection(where: { slug_exists: true }, limit: 1, order: published_DESC) {
-          ${BLOG_FIELDS}
-        
-      }
-    }`
-  );
-  return extractPost(entries, "dmPortfolioBlogCollection");
+  const response = await client.getEntries({
+    content_type: 'dmPortfolioBlog',
+    'fields.slug[exists]': true,
+    limit: 1,
+    order: ['fields.published'],
+  });
+  return response?.items[0];
 }
 
-export async function getPost(slug: string, preview: boolean) {
-  const entry = await fetchGraphQL(
-    `query {
-      dmPortfolioBlogCollection(where: { slug: "${slug}" }, limit: 1, preview: ${
-      preview ? "true" : "false"
-    }) {
-          ${SINGLE_BLOG_FIELDS}
-      }
-    }`,
-    preview
-  );
-  return extractPost(entry, "dmPortfolioBlogCollection");
+export async function getPost(
+  slug: string,
+) {
+  const response = await client.getEntries({
+    content_type: 'dmPortfolioBlog',
+    'fields.slug': slug,
+    limit: 1,
+    include: 10,
+  });
+  return response.items[0];
 }
 
 export async function getAllPostsWithSlug() {
-  const entries: TypeDmPortfolioBlogFields = await fetchGraphQL(
-    `query {
-      dmPortfolioBlogCollection(where: { slug_exists: true }, order: slug_DESC) {
-          ${BLOG_FIELDS}
-        
-      }
-    }`
-  );
-  return extractPostEntries(entries, "dmPortfolioBlogCollection");
+  const response = await client.getEntries({
+    content_type: 'dmPortfolioBlog',
+    'fields.slug[exists]': true,
+    order: ['fields.slug'],
+  });
+  return response.items;
 }
 
-export async function getPaginatedPostSummaries(page: number) {
-  const skipMultiplier = page === 1 ? 0 : page - 1;
-  const skip =
-    skipMultiplier > 0 ? Config.pagination.pageSize * skipMultiplier : 0;
-  const entries = await fetchGraphQL(
-    `query {
-        dmPortfolioBlogCollection(limit: ${Config.pagination.pageSize}, skip: ${skip}, order: published_DESC) {
-          total
-          ${BLOG_FIELDS}
-        }
-      }`
-  );
-  return entries?.data?.dmPortfolioBlogCollection;
+export async function getPaginatedPostSummaries(
+  page: number
+) {
+  const pageSize = Config.pagination.pageSize;
+  const skip = (page - 1) * pageSize;
+
+  const response = await client.getEntries({
+    content_type: 'dmPortfolioBlog',
+    limit: pageSize,
+    skip: skip,
+    order: ['fields.published'],
+  });
+
+  return response;
 }
 
 export async function getAllProjectsWithSlug() {
-  const entries: TypeDmPortfolioProjectsFields = await fetchGraphQL(
-    `query {
-      dmPortfolioProjectsCollection(where: { slug_exists: true }, order: slug_DESC) {
-        items {
-          ${PROJECT_FIELDS}
-        }
-      }
-    }`
-  );
-  return extractPostEntries(entries, "dmPortfolioProjectsCollection");
+  const response = await client.getEntries({
+    content_type: 'dmPortfolioProjects',
+    'fields.slug[exists]': true,
+    order: ['fields.slug'],
+  });
+  return response.items;
 }
 
-export async function getAllProjects(preview: boolean) {
-  const entries: TypeDmPortfolioProjectsFields = await fetchGraphQL(
-    `query {
-      dmPortfolioProjectsCollection(order: slug_DESC, preview: ${
-        preview ? "true" : "false"
-      }) {
-        items {
-          ${PROJECT_FIELDS}
-        }
-      }
-    }`,
-    preview
-  );
-  return extractPostEntries(entries, "dmPortfolioProjectsCollection");
+export async function getAllProjects() {
+  const response = await client.getEntries({
+    content_type: 'dmPortfolioProjects',
+    order: ['fields.slug'],
+  });
+  return response.items;
 }
 
-export async function getProject(slug: string, preview: boolean) {
-  const entry = await fetchGraphQL(
-    `query {
-      dmPortfolioProjectsCollection(where: { slug: "${slug}" }, preview: ${
-      preview ? "true" : "false"
-    }, limit: 1) {
-        items {
-          ${PROJECT_FIELDS}
-        }
-      }
-    }`,
-    preview
-  );
-  return extractPost(entry, "dmPortfolioProjectsCollection");
+export async function getProject(
+  slug: string,
+) {
+  const response = await client.getEntries({
+    content_type: 'dmPortfolioProjects',
+    'fields.slug': slug,
+    limit: 1,
+  });
+  return response.items[0];
 }

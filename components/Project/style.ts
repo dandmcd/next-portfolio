@@ -128,6 +128,7 @@ export const ProjectImg = styled(Image)`
   max-width: 100%;
   opacity: 0.8;
   width: 100%;
+  object-fit: cover;
   -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
   transition: opacity 0.35s, transform 0.35s;
 

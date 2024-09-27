@@ -43,7 +43,7 @@ export const Float = styled("div")<{ clicked: boolean }>`
   height: ${(props) => (props.clicked ? "20px" : "60px")};
   bottom: ${(props) => (props.clicked ? "60px" : "40px")};
   right: ${(props) => (props.clicked ? "40px" : "20px")};
-  background-color: #f5e269;
+  background: linear-gradient(135deg, #FFF9C4, #DFC412, #B28900);
   border-radius: 1em;
   text-align: center;
   cursor: pointer;
@@ -56,10 +56,6 @@ export const Float = styled("div")<{ clicked: boolean }>`
   transition: 0.3s cubic-bezier(0.8, 0.5, 0.2, 1.4);
   #menu-share + ul {
     visibility: hidden;
-  }
-  :hover {
-    background-color: #f9efac;
-    transform: scale(1.1);
   }
 `;
 
@@ -135,7 +131,7 @@ export const List = styled.ul`
   position: fixed;
   right: 20px;
   border-radius: 1em;
-  padding: 0 0.2em 0 0.2em;
+  padding: 0.4em;
   bottom: 90px;
   z-index: 100;
   text-align: end;

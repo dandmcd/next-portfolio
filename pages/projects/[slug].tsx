@@ -1,7 +1,6 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
-import { GetStaticPaths, NextPage } from "next";
-import { ProjectProps } from ".";
+import { BLOCKS, Document } from "@contentful/rich-text-types";
+import { NextPage } from "next";
 import HeadSeo from "../../components/HeadSeo";
 import { RichTextAsset } from "../../components/rich-text-asset";
 import { getAllProjectsWithSlug, getProject } from "../../lib/api";
@@ -25,9 +24,10 @@ import {
   TechTags,
   ViewButtons,
 } from "../../styles/projectsstyle";
+import { TypeDmPortfolioProjectsFields } from "../../lib/content-types";
 
 interface Props {
-  post: ProjectProps;
+  post: TypeDmPortfolioProjectsFields;
 }
 
 const ProjectPage: NextPage<Props> = ({ post }) => {
@@ -39,17 +39,14 @@ const ProjectPage: NextPage<Props> = ({ post }) => {
     preview,
     githubLink,
     demoLink,
-    imagesCollection,
-  } = post;
+  } = post?.fields;
   const options = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+        const fields = node.data.target.fields;
         return (
           <ContentfulImg>
-            <RichTextAsset
-              id={node.data.target.sys.id}
-              assets={imagesCollection.items}
-            />
+            <RichTextAsset fields={fields} />
           </ContentfulImg>
         );
       },
@@ -71,7 +68,7 @@ const ProjectPage: NextPage<Props> = ({ post }) => {
       <ProjectPageContainer>
         <Grid>
           <ContentSide>
-            {documentToReactComponents(description.json, options)}
+            {documentToReactComponents(description as unknown as Document, options)}
           </ContentSide>
           <SideBar>
             <div>
@@ -90,9 +87,9 @@ const ProjectPage: NextPage<Props> = ({ post }) => {
             <TechTags>
               <PackageBox>Tech Stack:</PackageBox>
               <TagList>
-                {technology.map((tag, index) => (
+                {technology && technology.map((tag, index) => (
                   <div key={index}>
-                    <Tag as={Tag} key={tag} disabled>
+                    <Tag key={tag}>
                       {tag}
                     </Tag>
                     <TagLine />
@@ -120,7 +117,7 @@ export const getStaticProps = async ({
   params: Params;
   preview: boolean;
 }) => {
-  const data = await getProject(params.slug, preview);
+  const data = await getProject(params.slug);
   return {
     props: {
       preview,
@@ -129,10 +126,10 @@ export const getStaticProps = async ({
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const allProjects: ProjectProps[] = await getAllProjectsWithSlug();
+export async function getStaticPaths() {
+  const allProjects = await getAllProjectsWithSlug();
   return {
-    paths: allProjects?.map(({ slug }) => `/projects/${slug}`) ?? [],
+    paths: allProjects.map((project) => `/projects/${project.fields.slug}`),
     fallback: false,
   };
 };
