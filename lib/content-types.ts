@@ -85,13 +85,14 @@ export interface TypeDmPortfolioProjectsFields {
 export interface TypeHomeFields {
   entryTitle?: string;
   heroTitle?: string;
-  metaDescription?: EntryFieldTypes.Text;
+  metaDescription?: string;
   subtitles?: string[];
   icons?: TypeIconsFields[];
   profileImage?: AssetProps;
   bio?: EntryFieldTypes.RichText;
   latestBlogText?: string;
   ctaButton?: TypeButtonOrLinkFields;
+  resumeFile?: AssetProps;
 }
 
 export interface TypeIconsFields {
