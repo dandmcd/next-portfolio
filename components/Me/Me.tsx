@@ -97,6 +97,7 @@ const Me = ({ blogPost, content }: { blogPost: TypeDmPortfolioBlogFields, conten
                         onClick={() => handleResumeDownload(`https:${content.resumeFile?.fields?.file?.url}`)}
                         style={{ background: 'none', border: 'none', cursor: 'pointer' }}
                         aria-label="Download Resume"
+                        title="Download Resume"
                       >
                         <Image
                           src={`https:${icon.fields.icon?.fields.file.url}`}
@@ -114,6 +115,7 @@ const Me = ({ blogPost, content }: { blogPost: TypeDmPortfolioBlogFields, conten
                       href={icon.fields.link?.fields.link || "#"}
                       rel="noopener noreferrer"
                       target={icon.fields.link?.fields.openInNewTab ? '_blank' : '_self'}
+                      title={icon.fields.icon?.fields.title || "Icon"}
                     >
                       <Image
                         src={`https:${icon.fields.icon?.fields.file.url}`}

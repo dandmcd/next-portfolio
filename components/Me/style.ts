@@ -66,23 +66,44 @@ export const Wrapper = styled.main`
 
 export const IntroSection = styled.div`
   display: grid;
+  grid-template-columns: 1fr;
   grid-column-gap: 1em;
+  justify-items: center;
+
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    grid-template-columns: 1fr;
   }
 `;
 
+
 export const Social = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   grid-column: 1 / 2;
   grid-row: 1 / 2;
+
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    grid-column: 1 / 2;
+    justify-content: center;
+  }
 `;
 
 export const MediaIcons = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  padding: 1em 0 1em 0;
+  padding: 1em 0;
+  flex-wrap: wrap;
+  gap: 0.2em;
+  margin-bottom: 1em;
+  button {
+    padding: 0 0;
+  }
+
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-    justify-content: space-space-between;
+    justify-content: center;
   }
 `;
 
@@ -132,6 +153,10 @@ export const CtaBtns = styled.div`
   position: relative;
   text-align: center;
   padding: 2em 2em;
+  
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    padding: 1em 1em;
+  }
 `;
 
 export const BlogEntry = styled.h3`
