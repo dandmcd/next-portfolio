@@ -214,3 +214,12 @@ export const TagLine = styled.hr`
   height: 0.75px;
   width: 90px;
 `;
+
+export const ReleaseYear = styled.h4`
+  color: #706d57;
+  font-weight: 600;
+  text-align: center;
+  margin: 0.5em auto;
+  font-size: 18px;
+  padding: 0 0 0 0.5em;
+`;
