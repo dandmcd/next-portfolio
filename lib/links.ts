@@ -2,7 +2,7 @@ export default [
   {
     className: "linkcolor",
     path: "/",
-    text: "me",
+    text: "home",
   },
   {
     className: "linkcolor",

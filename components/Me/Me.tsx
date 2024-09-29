@@ -68,7 +68,7 @@ const Me = ({ blogPost, content }: { blogPost: TypeDmPortfolioBlogFields, conten
   return (
     <>
       <HeadSeo
-        title="Daniel.Me"
+        title="Daniel McDermott | Developer"
         description={content?.metaDescription}
         canonicalUrl={siteMetadata.siteUrl}
       />
