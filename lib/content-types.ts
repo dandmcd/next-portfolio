@@ -79,6 +79,7 @@ export interface TypeDmPortfolioProjectsFields {
   slug: string;
   githubLink?: string;
   demoLink?: string;
+  releaseYear?: string;
   };
 }
 

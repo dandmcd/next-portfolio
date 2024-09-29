@@ -17,6 +17,7 @@ import {
   Preview,
   ProjectPageContainer,
   ProjectTitle,
+  ReleaseYear,
   SideBar,
   Tag,
   TagLine,
@@ -39,7 +40,9 @@ const ProjectPage: NextPage<Props> = ({ post }) => {
     preview,
     githubLink,
     demoLink,
+    releaseYear,
   } = post?.fields;
+  
   const options = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
@@ -58,6 +61,7 @@ const ProjectPage: NextPage<Props> = ({ post }) => {
       ),
     },
   };
+
   return (
     <>
       <HeadSeo
@@ -73,6 +77,7 @@ const ProjectPage: NextPage<Props> = ({ post }) => {
           <SideBar>
             <div>
               <ProjectTitle>{title}</ProjectTitle>
+              {releaseYear && <ReleaseYear>Released in {releaseYear}</ReleaseYear>}
               <Preview>{preview}</Preview>
               <ViewButtons>
                 <a href={githubLink} rel="noopener noreferrer" target="_blank">
