@@ -39,7 +39,7 @@ export async function getMostRecentBlogPost() {
     content_type: 'dmPortfolioBlog',
     'fields.slug[exists]': true,
     limit: 1,
-    order: ['fields.published'],
+    order: ['-fields.published'],
   });
   return response?.items[0];
 }
@@ -75,7 +75,7 @@ export async function getPaginatedPostSummaries(
     content_type: 'dmPortfolioBlog',
     limit: pageSize,
     skip: skip,
-    order: ['fields.published'],
+    order: ['-fields.published'],
   });
 
   return response;
@@ -93,7 +93,7 @@ export async function getAllProjectsWithSlug() {
 export async function getAllProjects() {
   const response = await client.getEntries({
     content_type: 'dmPortfolioProjects',
-    order: ['fields.slug'],
+    order: ['-sys.createdAt'],
   });
   return response.items;
 }
