@@ -1,15 +1,18 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
   compiler: {
     styledComponents: true,
   },
   images: {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ["images.ctfassets.net"],
+    remotePatterns: [
+      {
+        hostname: "images.ctfassets.net",
+      },
+    ],
   },
-  reactStrictMode: true,
-  swcMinify: true,
 };
 
 const withPWA = require("next-pwa")({
@@ -18,4 +21,4 @@ const withPWA = require("next-pwa")({
   register: true,
 });
 
-module.exports = withPWA(nextConfig);
+export default withPWA(nextConfig);
