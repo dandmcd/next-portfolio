@@ -1,4 +1,4 @@
-export default [
+const links = [
   {
     className: "linkcolor",
     path: "/",
@@ -20,3 +20,5 @@ export default [
     text: "projects",
   },
 ];
+
+export default links;
