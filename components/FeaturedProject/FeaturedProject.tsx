@@ -16,7 +16,7 @@ const FeaturedProject = ({
   project,
 }: {
   project: TypeDmPortfolioProjectsFields;
-}): JSX.Element => {
+}): React.JSX.Element => {
   const { title, slug, preview, images } = project.fields;
   return (
     <>

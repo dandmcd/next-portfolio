@@ -11,7 +11,7 @@ const CodeSnippet = ({
   code,
 }: {
   code: string;
-}): JSX.Element => {
+}): React.JSX.Element => {
   // Highlight the code using Prism.js after the component mounts
   useEffect(() => {
     Prism.highlightAll();
