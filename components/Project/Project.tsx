@@ -9,7 +9,7 @@ import {
 } from "./style";
 import { TypeDmPortfolioProjectsFields } from "../../lib/content-types";
 
-const Project = ({ project }: { project: TypeDmPortfolioProjectsFields }): JSX.Element => {
+const Project = ({ project }: { project: TypeDmPortfolioProjectsFields }): React.JSX.Element => {
   const { title, slug, preview, images } = project.fields;
 
   return (
