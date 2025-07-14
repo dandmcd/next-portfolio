@@ -56,37 +56,42 @@ export const Wrapper = styled.div`
   }
   background-color: #FEF3C7;
   ::-webkit-scrollbar {
-    width: 3px;
-    height: 3px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-button {
     width: 0px;
     height: 0px;
   }
   ::-webkit-scrollbar-thumb {
-    background: #FEF3C7;
-    border: 0px none #ffffff;
-    border-radius: 50px;
+    background: linear-gradient(to bottom, #D97706, #B45309);
+    border: 1px solid #92400E;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #F59E0B;
+    background: linear-gradient(to bottom, #F59E0B, #D97706);
+    border-color: #B45309;
   }
   ::-webkit-scrollbar-thumb:active {
-    background: #D97706;
+    background: linear-gradient(to bottom, #B45309, #92400E);
+    border-color: #78350F;
   }
   ::-webkit-scrollbar-track {
-    background: #B45309;
-    border: 0px none #ffffff;
-    border-radius: 50px;
+    background: #FEF3C7;
+    border: 1px solid #FCD34D;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   }
   ::-webkit-scrollbar-track:hover {
-    background: #92400E;
+    background: #FCD34D;
+    border-color: #F59E0B;
   }
   ::-webkit-scrollbar-track:active {
-    background: #D97706;
+    background: #F59E0B;
   }
   ::-webkit-scrollbar-corner {
-    background: transparent;
+    background: #FEF3C7;
   }
 `;
 

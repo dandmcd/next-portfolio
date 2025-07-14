@@ -54,7 +54,7 @@ export const Wrapper = styled.main`
   padding: 20px;
   border-radius: 1em;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
-  background: linear-gradient(to right, rgba(223, 196, 18, 0.2), rgba(223, 196, 18, 0.5));
+  background: linear-gradient(to right, rgba(252, 211, 77, 0.15), rgba(252, 211, 77, 0.25));
   width: 70vw;
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     width: 80vw;
@@ -137,12 +137,12 @@ export const IntroBox = styled.div`
 
 export const Intro = styled.h2`
   position: relative;
-  color: #16140f;
+  color: #374151;
   font-weight: 200;
   text-align: left;
   margin: 0 auto;
   padding-left: 0.3em;
-  border-left: 3px solid #414033;
+  border-left: 3px solid #B45309;
 
   @media only screen and (min-width: 1824px) {
     font-size: 28px;
@@ -161,7 +161,7 @@ export const CtaBtns = styled.div`
 
 export const BlogEntry = styled.h3`
   padding: 0.3em 0 0 0;
-  color: #414033;
+  color: #374151;
   text-align: center;
   font-size: 26px;
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
@@ -178,10 +178,10 @@ export const BlogSpan = styled.span`
   a {
     text-decoration: underline;
     text-underline-offset: .4rem;
-    color: #16140f;
+    color: #374151;
   }
   a:hover {
-    color: #B28900;
+    color: #D97706;
   }
 `;
 
@@ -197,7 +197,6 @@ export const ViewButton = styled(CommonButton)`
   top: 30px;
   font-size: 28px;
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-    background-color: #f5e269;
     font-size: 20px;
   }
 `;
