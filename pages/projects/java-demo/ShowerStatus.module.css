@@ -108,43 +108,95 @@
 }
 
 .popover-content button {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px 20px;
+  border-radius: 999px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(217, 119, 6, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .popover-content button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #F59E0B 0%, #FCD34D 100%);
+  color: #1F2937;
+  box-shadow: 
+    0 8px 25px rgba(245, 158, 11, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.popover-content button:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 10px rgba(217, 119, 6, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Close button */
 .close-popover {
-  background-color: transparent;
+  background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+  color: white;
   border: none;
   font-size: 1.2rem;
+  font-weight: bold;
   cursor: pointer;
   position: absolute;
   top: 5px;
   right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+.close-popover:hover {
+  background: linear-gradient(135deg, #EF4444 0%, #F87171 100%);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.5);
+  transform: scale(1.1);
 }
 
 .reserveButton {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 999px;
   cursor: pointer;
   margin-bottom: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(217, 119, 6, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .reserveButton:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #F59E0B 0%, #FCD34D 100%);
+  color: #1F2937;
+  box-shadow: 
+    0 8px 25px rgba(245, 158, 11, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.reserveButton:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 10px rgba(217, 119, 6, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .reserveForm {
@@ -165,18 +217,35 @@
 }
 
 .reserveForm button {
-  background-color: #28a745;
+  background: linear-gradient(135deg, #059669 0%, #10B981 100%);
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 999px;
   cursor: pointer;
   margin-top: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(5, 150, 105, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .reserveForm button:hover {
-  background-color: #218838;
+  background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+  box-shadow: 
+    0 8px 25px rgba(16, 185, 129, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.reserveForm button:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 10px rgba(5, 150, 105, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .reservationResult {

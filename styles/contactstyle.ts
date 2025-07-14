@@ -100,12 +100,26 @@ export const SubmitButton = styled(CommonButton)`
   top: 30px;
   font-size: 18px;
   :disabled {
-    background-color: #E5E7EB;
+    background: linear-gradient(135deg, #E5E7EB 0%, #F3F4F6 100%);
     color: #9CA3AF;
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: not-allowed;
+    transform: none;
+    &:hover {
+      background: linear-gradient(135deg, #E5E7EB 0%, #F3F4F6 100%);
+      color: #9CA3AF;
+      box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1);
+      transform: none;
+    }
+    &:before {
+      display: none;
+    }
   }
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     :disabled {
-      background-color: #E5E7EB;
+      background: linear-gradient(135deg, #E5E7EB 0%, #F3F4F6 100%);
     }
   }
 `;
