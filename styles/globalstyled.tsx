@@ -25,10 +25,12 @@ export const theme = {
 };
 
 export const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@200;400;600;700;800&display=swap');
+  
   body {
     min-height: 100vh;
     z-index: 1;
-    font-family: "Barlow Semi Condensed", sans-serif;
+    font-family: "Barlow Semi Condensed", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     margin: 0;
     padding: 0;
     color: #111;
@@ -36,7 +38,7 @@ export const GlobalStyle = createGlobalStyle`
     background-color: #fff;
   }
   button {
-    font-family: "Barlow Semi Condensed", sans-serif;
+    font-family: "Barlow Semi Condensed", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   }
   a {
     color: #414033;
