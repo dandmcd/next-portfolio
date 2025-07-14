@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CommonTitle = styled.h1`
   line-height: 1.2;
   position: relative;
-  color: #414033;
+  color: #1F2937;
   margin: 0 auto;
   padding: 0.1em 0 0.1em 0;
   font-weight: 800;
@@ -20,8 +20,8 @@ export const CommonButton = styled.button`
   --webkit-mask-image: none;
   width: 75%;
   position: relative;
-  background-color: #dfc412;
-  color: #414033;
+  background-color: #D97706;
+  color: #FFFFFF;
   margin: 0 auto;
   outline: none;
   border-radius: 999px;
@@ -43,7 +43,7 @@ export const CommonButton = styled.button`
     border: 0 solid;
     box-sizing: border-box;
     --thickness: 4px;
-    border: var(--thickness) solid #483f06;
+    border: var(--thickness) solid #B45309;
     border-radius: 999px;
     content: "";
     inset: calc(var(--thickness) * -1);
@@ -58,8 +58,8 @@ export const CommonButton = styled.button`
     transform: scale(1);
   }
   &:hover {
-    background-color: transparent;
-    color: #414033;
+    background-color: #F59E0B;
+    color: #1F2937;
   }
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     width: 220px;

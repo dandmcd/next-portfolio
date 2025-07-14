@@ -10,7 +10,7 @@ export const EmailSection = styled.div`
   padding-top: 0.25em;
   padding-bottom: 1em;
   position: relative;
-  color: #414033;
+  color: #1F2937;
   margin: 0 auto;
 `;
 
@@ -29,7 +29,7 @@ export const EmailButton = styled(CommonButton)`
 export const Form = styled.form`
   width: 340px;
   height: 490px;
-  background: #f9efac;
+  background: #FEF3C7;
   border-radius: 1em;
   margin: 2em auto 2em auto;
   padding: 20px 30px;
@@ -69,9 +69,9 @@ export const Input = styled.input`
   resize: none;
   border: 0;
   transition: all 0.3s;
-  border-bottom: 2px solid #a4a089;
+  border-bottom: 2px solid #9CA3AF;
   :focus {
-    border-bottom: 2px solid #414033;
+    border-bottom: 2px solid #1F2937;
   }
 `;
 
@@ -85,9 +85,9 @@ export const InputMsg = styled.textarea`
   resize: none;
   border: 0;
   transition: all 0.3s;
-  border: 2px solid #a4a089;
+  border: 2px solid #9CA3AF;
   :focus {
-    border: 2px solid #414033;
+    border: 2px solid #1F2937;
   }
 `;
 
@@ -100,8 +100,12 @@ export const SubmitButton = styled(CommonButton)`
   top: 30px;
   font-size: 18px;
   :disabled {
-    background-color: white;
+    background-color: #E5E7EB;
+    color: #9CA3AF;
+  }
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-    background-color: #f5e269;
+    :disabled {
+      background-color: #E5E7EB;
+    }
   }
 `;
