@@ -15,7 +15,7 @@ const BlogItem = styled.div<{ isEven: boolean }>`
   border-radius: 1em;
   max-width: 1024px;
   margin: 1em auto 0 auto;
-  background-color: ${({ isEven }) => (isEven ? "#f9efac" : "#f5e269")};
+  background-color: ${({ isEven }) => (isEven ? "#FEF3C7" : "#FCD34D")};
 `;
 
 export interface BlogProps {

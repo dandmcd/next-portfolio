@@ -188,7 +188,7 @@ export const BlogSpan = styled.span`
 export const Tools = styled.h2`
   font-weight: 800;
   -webkit-text-stroke: 1px black;
-  color: #dfc412;
+  color: #F59E0B;
   text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
     -1px 1px 0 #000, 1px 1px 0 #000;
 `;
