@@ -13,11 +13,11 @@ export const Figure = styled.div`
   height: 360px;
   text-align: center;
   cursor: pointer;
-  background: rgb(72, 63, 6);
+  background: rgb(31, 41, 55);
   background: linear-gradient(
     90deg,
-    rgba(72, 63, 6, 0.95) 20%,
-    rgba(156, 137, 12, 0.9) 100%
+    rgba(31, 41, 55, 0.95) 20%,
+    rgba(217, 119, 6, 0.9) 100%
   );
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     max-width: 100%;
@@ -51,7 +51,7 @@ export const ProjectTitle = styled.h2`
   grid-row: 1 / 2;
   margin: 0;
   a {
-    color: #414033;
+    color: #1F2937;
   }
   letter-spacing: 2px;
   font-size: 32px;
@@ -68,7 +68,7 @@ export const ProjectTitle = styled.h2`
     width: 100%;
     height: 3px;
     color: #faf9f8;
-    background: #efd318;
+    background: #F59E0B;
     content: "";
     -webkit-transition: -webkit-transform 0.35s;
     transition: transform 0.35s;
@@ -94,7 +94,7 @@ export const ProjectDescription = styled.p`
   transform: translate3d(100%, 0, 0);
   ${Figure}:hover & {
     opacity: 1;
-    border-left: 5px solid #414033;
+    border-left: 5px solid #B45309;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }

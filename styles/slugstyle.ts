@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const ContentfulHeading = styled.h4`
-  border-left: 3px solid #414033;
-  background-color: #f9efac;
+  border-left: 3px solid #1F2937;
+  background-color: #FEF3C7;
   border-radius: 0 4px 4px 0;
   padding: 0 0 0 0.2em;
   font-size: 20px;
@@ -36,7 +36,7 @@ export const ImgCaption = styled.p`
   max-width: 75%;
   padding: 0.3em;
   font-size: 18px;
-  color: #fef8ed;
+  color: #FFFFFF;
   font-weight: 400;
   position: relative;
   overflow: hidden;
@@ -54,39 +54,44 @@ export const Wrapper = styled.div`
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     width: 100vw;
   }
-  background-color: #fdfae5;
+  background-color: #FEF3C7;
   ::-webkit-scrollbar {
-    width: 3px;
-    height: 3px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-button {
     width: 0px;
     height: 0px;
   }
   ::-webkit-scrollbar-thumb {
-    background: #f9efac;
-    border: 0px none #ffffff;
-    border-radius: 50px;
+    background: linear-gradient(to bottom, #D97706, #B45309);
+    border: 1px solid #92400E;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #f5e269;
+    background: linear-gradient(to bottom, #F59E0B, #D97706);
+    border-color: #B45309;
   }
   ::-webkit-scrollbar-thumb:active {
-    background: #efd318;
+    background: linear-gradient(to bottom, #B45309, #92400E);
+    border-color: #78350F;
   }
   ::-webkit-scrollbar-track {
-    background: #483f06;
-    border: 0px none #ffffff;
-    border-radius: 50px;
+    background: #FEF3C7;
+    border: 1px solid #FCD34D;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   }
   ::-webkit-scrollbar-track:hover {
-    background: #9c890c;
+    background: #FCD34D;
+    border-color: #F59E0B;
   }
   ::-webkit-scrollbar-track:active {
-    background: #efd318;
+    background: #F59E0B;
   }
   ::-webkit-scrollbar-corner {
-    background: transparent;
+    background: #FEF3C7;
   }
 `;
 
@@ -94,7 +99,8 @@ export const BlogTitle = styled.h1`
   margin: 0 auto;
   padding: 0.3em 0.3em;
   letter-spacing: 1px;
-  background-color: #f5e269;
+  background-color: #FCD34D;
+  color: #1F2937;
 `;
 
 export const ContentWrapper = styled.div`
@@ -102,7 +108,7 @@ export const ContentWrapper = styled.div`
 `;
 
 export const UpdatedAt = styled.h4`
-  color: #706d57;
+  color: #6B7280;
   margin: 0.3em auto 0 1em;
 `;
 
@@ -127,7 +133,7 @@ export const GoBack = styled.a`
 `;
 
 export const Arrow = styled.i`
-  border: solid #414033;
+  border: solid #1F2937;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 5px;

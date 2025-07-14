@@ -43,7 +43,7 @@ export const Float = styled("div")<{ clicked: boolean }>`
   height: ${(props) => (props.clicked ? "20px" : "60px")};
   bottom: ${(props) => (props.clicked ? "60px" : "40px")};
   right: ${(props) => (props.clicked ? "40px" : "20px")};
-  background: linear-gradient(135deg, #FFF9C4, #DFC412, #B28900);
+  background: linear-gradient(135deg, #FFFBEB, #F59E0B, #D97706);
   border-radius: 1em;
   text-align: center;
   cursor: pointer;
@@ -74,7 +74,7 @@ export const Hamburger = styled("div")<{ clicked: boolean }>`
   transform: translate(-50%, -50%);
 
   span {
-    background-color: #414033;
+    background-color: #1F2937;
     position: absolute;
     border-radius: 2px;
     transition: 0.3s cubic-bezier(0.8, 0.5, 0.2, 1.4);
@@ -106,7 +106,7 @@ export const Hamburger = styled("div")<{ clicked: boolean }>`
 export const TooltipText = styled.span`
   visibility: hidden;
   width: 100px;
-  background-color: #483f06;
+  background-color: #1F2937;
   color: #fdfae5;
   text-align: center;
   padding: 5px 0;
@@ -157,8 +157,8 @@ export const ListItem = styled("li")<{ clicked: boolean }>`
   margin-bottom: 10px;
   color: #fef8ed;
   ::first-letter {
-    text-shadow: 1px 1px 2px #f9efac;
-    color: #dfc412;
+    text-shadow: 1px 1px 2px #FEF3C7;
+    color: #F59E0B;
     transition: color 0.5s;
   }
   a {

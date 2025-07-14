@@ -11,9 +11,9 @@ export const FeaturedProjectContainer = styled.div`
   width: 100%;
   padding-top: 1em;
   padding-bottom: 1em;
-  background-color: #fdfae5;
+  background-color: #FEF3C7;
   position: relative;
-  color: #414033;
+  color: #1F2937;
   margin: 0 auto;
   text-align: center;
 `;
@@ -53,7 +53,7 @@ export const ImgCaption = styled.p`
   max-width: 75%;
   padding: 0.3em;
   font-size: 18px;
-  color: #fef8ed;
+  color: #FFFFFF;
   font-weight: 400;
   position: relative;
   overflow: hidden;
@@ -67,7 +67,7 @@ export const ContentfulP = styled.p`
 `;
 
 export const ContentfulHeading = styled.h2`
-  border-left: 3px solid #414033;
+  border-left: 3px solid #1F2937;
   padding: 0 0 0 0.2em;
 `;
 
@@ -92,40 +92,45 @@ export const ContentSide = styled.div`
 
   grid-column: 1 / 2;
   grid-row: 1 / 2;
-  background: #f5e269;
+  background: #FCD34D;
   padding: 0.4rem;
   ::-webkit-scrollbar {
-    width: 3px;
-    height: 3px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-button {
     width: 0px;
     height: 0px;
   }
   ::-webkit-scrollbar-thumb {
-    background: #f9efac;
-    border: 0px none #ffffff;
-    border-radius: 50px;
+    background: linear-gradient(to bottom, #D97706, #B45309);
+    border: 1px solid #92400E;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #f5e269;
+    background: linear-gradient(to bottom, #F59E0B, #D97706);
+    border-color: #B45309;
   }
   ::-webkit-scrollbar-thumb:active {
-    background: #efd318;
+    background: linear-gradient(to bottom, #B45309, #92400E);
+    border-color: #78350F;
   }
   ::-webkit-scrollbar-track {
-    background: #483f06;
-    border: 0px none #ffffff;
-    border-radius: 50px;
+    background: #FEF3C7;
+    border: 1px solid #FCD34D;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   }
   ::-webkit-scrollbar-track:hover {
-    background: #9c890c;
+    background: #FCD34D;
+    border-color: #F59E0B;
   }
   ::-webkit-scrollbar-track:active {
-    background: #efd318;
+    background: #F59E0B;
   }
   ::-webkit-scrollbar-corner {
-    background: transparent;
+    background: #FEF3C7;
   }
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     grid-column: 1 / 3;
@@ -137,7 +142,7 @@ export const ContentSide = styled.div`
 export const SideBar = styled.div`
   grid-column: 2 / 3;
   grid-row: 1 / 2;
-  border-left: 0.5px solid #c6c4b6;
+  border-left: 0.5px solid #D1D5DB;
   padding: 0.4rem;
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     grid-column: 1 / 2;
@@ -145,7 +150,7 @@ export const SideBar = styled.div`
 `;
 
 export const ProjectTitle = styled.h1`
-  color: #414033;
+  color: #1F2937;
   margin: 0 auto;
   font-weight: 800;
   text-align: center;
@@ -154,10 +159,10 @@ export const ProjectTitle = styled.h1`
 `;
 
 export const Preview = styled.h4`
-  color: #706d57;
+  color: #6B7280;
   margin: 2.5em;
   padding: 0.5em;
-  border-left: 3px solid #414033;
+  border-left: 3px solid #1F2937;
   text-align: left;
   font-weight: 400;
 `;
@@ -204,19 +209,19 @@ export const TagList = styled.ul`
 `;
 
 export const Tag = styled.h4`
-  color: #16140f;
+  color: #1F2937;
   font-weight: 600;
 `;
 
 export const TagLine = styled.hr`
-  background: #8e8a6e;
+  background: #9CA3AF;
   border: 0;
   height: 0.75px;
   width: 90px;
 `;
 
 export const ReleaseYear = styled.h4`
-  color: #706d57;
+  color: #6B7280;
   font-weight: 600;
   text-align: center;
   margin: 0.5em auto;
