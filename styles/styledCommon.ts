@@ -20,13 +20,15 @@ export const CommonButton = styled.button`
   --webkit-mask-image: none;
   width: 75%;
   position: relative;
-  background-color: #D97706;
+  background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
   color: #FFFFFF;
   margin: 0 auto;
   outline: none;
   border-radius: 999px;
   border: 0 solid;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 
+    0 4px 15px rgba(217, 119, 6, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   min-width: 156px;
   line-height: 1.5;
@@ -38,28 +40,39 @@ export const CommonButton = styled.button`
   text-align: center;
   letter-spacing: 0.1rem;
   cursor: pointer;
-  transition: background-color 0.6s ease;
+  transition: all 0.3s ease;
   &:before {
     border: 0 solid;
     box-sizing: border-box;
-    --thickness: 4px;
-    border: var(--thickness) solid #B45309;
+    --thickness: 3px;
+    border: var(--thickness) solid #FCD34D;
     border-radius: 999px;
     content: "";
     inset: calc(var(--thickness) * -1);
     opacity: 0;
     pointer-events: none;
     position: absolute;
-    transform: scale(1.3);
-    transition: transform 0.2s, opacity 0.2s;
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(252, 211, 77, 0.6);
   }
   &:hover:before {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1.05);
   }
   &:hover {
-    background-color: #F59E0B;
+    background: linear-gradient(135deg, #F59E0B 0%, #FCD34D 100%);
     color: #1F2937;
+    box-shadow: 
+      0 8px 25px rgba(245, 158, 11, 0.5),
+      0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0);
+    box-shadow: 
+      0 2px 10px rgba(217, 119, 6, 0.4),
+      0 1px 3px rgba(0, 0, 0, 0.2);
   }
   @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     width: 220px;
