@@ -51,7 +51,9 @@ export const CommonButton = styled.button`
     top: calc(var(--thickness) * -1);
     right: calc(var(--thickness) * -1.5);
     bottom: calc(var(--thickness) * -1);
-    left: calc(var(--thickness) * -1.5);
+    right: calc(var(--thickness) * -1);
+    bottom: calc(var(--thickness) * -1);
+    left: calc(var(--thickness) * -1);
     opacity: 0;
     pointer-events: none;
     position: absolute;
